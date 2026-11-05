@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tibbiyot kutubxonasi</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f8f9; --card:#ffffff; --ink:#122126; --muted:#5b6b70;
+    --brand:#0f766e; --brand-2:#14b8a6; --brand-soft:#d9f2ee;
+    --line:#dfe7ea; --accent:#e11d48; --radius:14px;
+    --shadow:0 6px 24px rgba(18,33,38,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Manrope',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;color:var(--brand)}
+  .logo svg{width:34px;height:34px}
+  .menu{display:flex;gap:4px;list-style:none}
+  .menu a{padding:8px 14px;border-radius:999px;font-weight:600;font-size:.95rem;color:var(--muted);transition:.2s}
+  .menu a:hover,.menu a.active{background:var(--brand-soft);color:var(--brand)}
+  .burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer;font-size:1.2rem}
+  @media(max-width:760px){
+    .menu{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;padding:12px 20px;border-bottom:1px solid var(--line)}
+    .menu.open{display:flex}
+    .burger{display:block}
+  }
+
+  /* Hero */
+  .hero{padding:64px 0 48px;background:linear-gradient(135deg,#0f766e 0%,#115e59 55%,#134e4a 100%);color:#fff;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.07)}
+  .hero h1{font-size:clamp(1.9rem,4vw,3rem);font-weight:800;line-height:1.15;max-width:680px}
+  .hero p{margin-top:14px;max-width:600px;color:#d1fae5;font-size:1.05rem}
+  .search{margin-top:28px;display:flex;gap:10px;max-width:640px;background:#fff;padding:8px;border-radius:999px;box-shadow:var(--shadow)}
+  .search input{flex:1;border:0;outline:0;padding:10px 16px;font-size:1rem;font-family:inherit;background:transparent;color:var(--ink)}
+  .search button{background:var(--brand);color:#fff;border:0;border-radius:999px;padding:10px 22px;font-weight:700;cursor:pointer;font-family:inherit}
+  .search button:hover{background:#0b5f58}
+  .stats{display:flex;gap:28px;margin-top:32px;flex-wrap:wrap}
+  .stat b{display:block;font-size:1.6rem;font-weight:800}
+  .stat span{color:#a7f3d0;font-size:.9rem}
+
+  /* Sections */
+  section{padding:56px 0}
+  .sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+  h2{font-size:1.7rem;font-weight:800}
+  .sub{color:var(--muted);margin-top:4px}
+
+  /* Categories */
+  .cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+  .cat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;cursor:pointer;transition:.2s;text-align:left;font-family:inherit}
+  .cat:hover,.cat.active{border-color:var(--brand);box-shadow:var(--shadow);transform:translateY(-2px)}
+  .cat .ic{width:44px;height:44px;border-radius:12px;background:var(--brand-soft);display:grid;place-items:center;font-size:1.4rem;margin-bottom:10px}
+  .cat b{display:block;font-weight:700}
+  .cat small{color:var(--muted)}
+
+  /* Books */
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .toolbar select,.toolbar input{padding:10px 14px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:.95rem;background:#fff;color:var(--ink)}
+  .books{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+  .book{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+  .book:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+  .cover{height:150px;display:flex;align-items:flex-end;padding:14px;color:#fff;font-weight:700;font-size:1rem;line-height:1.25;position:relative}
+  .cover::before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:rgba(0,0,0,.18)}
+  .cover span{position:relative;text-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .book .body{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .book .author{color:var(--muted);font-size:.9rem}
+  .tag{display:inline-block;background:var(--brand-soft);color:var(--brand);font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:999px;align-self:flex-start}
+  .meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;font-size:.85rem;color:var(--muted)}
+  .avail{font-weight:700;color:#15803d}
+  .busy{font-weight:700;color:var(--accent)}
+  .btn{display:inline-block;background:var(--brand);color:#fff;border:0;border-radius:10px;padding:9px 14px;font-weight:700;cursor:pointer;font-family:inherit;font-size:.9rem;transition:.2s}
+  .btn:hover{background:#0b5f58}
+  .btn.ghost{background:transparent;color:var(--brand);border:1px solid var(--brand)}
+  .btn.ghost:hover{background:var(--brand-soft)}
+  .btn[disabled]{opacity:.5;cursor:not-allowed}
+  .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px}
+
+  /* Services */
+  .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .svc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .svc .ic{font-size:1.8rem;margin-bottom:10px}
+  .svc h3{font-size:1.05rem;margin-bottom:6px}
+  .svc p{color:var(--muted);font-size:.95rem}
+
+  /* About + hours */
+  .about{display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:start}
+  @media(max-width:760px){.about{grid-template-columns:1fr}}
+  .about p{color:var(--muted);margin-bottom:12px}
+  .hours{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .hours table{width:100%;border-collapse:collapse}
+  .hours td{padding:8px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+  .hours td:last-child{text-align:right;font-weight:600}
+  .hours tr:last-child td{border:0}
+
+  /* Contact */
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  @media(max-width:760px){.contact{grid-template-columns:1fr}}
+  form{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:12px}
+  label{font-weight:600;font-size:.9rem}
+  form input,form textarea,form select{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:.95rem;color:var(--ink)}
+  form textarea{min-height:110px;resize:vertical}
+  .note{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;padding:12px 14px;border-radius:10px;font-weight:600;display:none}
+  .info{display:flex;flex-direction:column;gap:14px}
+  .info div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+  .info b{display:block;margin-bottom:4px}
+  .info span{color:var(--muted)}
+
+  footer{background:#0f2a2d;color:#b7cfd2;padding:32px 0;font-size:.9rem}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  /* Modal */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
+  .modal.open{display:flex}
+  .modal .box{background:#fff;border-radius:16px;max-width:460px;width:100%;padding:24px}
+  .modal h3{margin-bottom:6px}
+  .modal p{color:var(--muted);margin-bottom:14px}
+  .modal .row{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">
+      <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="6" width="32" height="28" rx="6" fill="#0f766e"/><path d="M20 13v14M13 20h14" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>
+      Tibbiyot kutubxonasi
+    </a>
+    <button class="burger" aria-label="Menyu" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+    <ul class="menu" id="menu">
+      <li><a href="#top" class="active">Bosh sahifa</a></li>
+      <li><a href="#bolimlar">Bo'limlar</a></li>
+      <li><a href="#kitoblar">Kitoblar</a></li>
+      <li><a href="#xizmatlar">Xizmatlar</a></li>
+      <li><a href="#biz">Biz haqimizda</a></li>
+      <li><a href="#aloqa">Aloqa</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <h1>Tibbiyot adabiyotlari — bir joyda, hamma uchun</h1>
+    <p>Talabalar, shifokorlar va tadqiqotchilar uchun darsliklar, atlaslar, ilmiy jurnallar va elektron resurslar katalogi.</p>
+    <div class="search">
+      <input id="q" type="text" placeholder="Kitob nomi, muallif yoki mavzu..." oninput="render()">
+      <button onclick="document.getElementById('kitoblar').scrollIntoView()">Qidirish</button>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="st-total">0</b><span>kitob fondda</span></div>
+      <div class="stat"><b>8</b><span>bo'lim</span></div>
+      <div class="stat"><b>1 200+</b><span>o'quvchi</span></div>
+      <div class="stat"><b>24/7</b><span>elektron katalog</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="bolimlar">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>Bo'limlar</h2><p class="sub">Yo'nalish bo'yicha tanlang</p></div>
+      <button class="btn ghost" onclick="setCat('all')">Barchasini ko'rsatish</button>
+    </div>
+    <div class="cats" id="cats"></div>
+  </div>
+</section>
+
+<section id="kitoblar" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>Kitoblar katalogi</h2><p class="sub" id="count"></p></div>
+    </div>
+    <div class="toolbar">
+      <select id="sort" onchange="render()">
+        <option value="title">Nomi bo'yicha</option>
+        <option value="year">Yangi nashrlar</option>
+        <option value="author">Muallif bo'yicha</option>
+      </select>
+      <select id="lang" onchange="render()">
+        <option value="all">Barcha tillar</option>
+        <option value="O'zbek">O'zbek</option>
+        <option value="Rus">Rus</option>
+        <option value="Ingliz">Ingliz</option>
+      </select>
+      <select id="avail" onchange="render()">
+        <option value="all">Barchasi</option>
+        <option value="yes">Faqat mavjudlari</option>
+        <option value="e">Elektron nusxa bor</option>
+      </select>
+    </div>
+    <div class="books" id="books"></div>
+  </div>
+</section>
+
+<section id="xizmatlar">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>Xizmatlar</h2><p class="sub">Kutubxona nimalarni taklif qiladi</p></div></div>
+    <div class="services">
+      <div class="svc"><div class="ic">📚</div><h3>Kitob berish</h3><p>Darslik va qo'llanmalar 14 kunga beriladi, muddatni 2 marta uzaytirish mumkin.</p></div>
+      <div class="svc"><div class="ic">💻</div><h3>Elektron kutubxona</h3><p>PDF darsliklar, ma'ruzalar va ilmiy maqolalarga masofadan kirish.</p></div>
+      <div class="svc"><div class="ic">🔬</div><h3>Ilmiy bazalar</h3><p>PubMed, Scopus va boshqa xalqaro bazalardan foydalanish bo'yicha yordam.</p></div>
+      <div class="svc"><div class="ic">🏛️</div><h3>O'quv zali</h3><p>120 o'rinli zal, Wi-Fi, printer va skanerlash xizmati.</p></div>
+      <div class="svc"><div class="ic">🎓</div><h3>Diplom va dissertatsiya</h3><p>Adabiyotlar ro'yxatini tuzish va bibliografik maslahat.</p></div>
+      <div class="svc"><div class="ic">🗓️</div><h3>Seminarlar</h3><p>Har oyda axborot savodxonligi va ilmiy yozuv bo'yicha treninglar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="biz" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap about">
+    <div>
+      <h2>Biz haqimizda</h2>
+      <p style="margin-top:10px">Tibbiyot kutubxonasi — tibbiyot sohasidagi talabalar, o'qituvchilar, shifokorlar va tadqiqotchilarga ilmiy-axborot xizmati ko'rsatuvchi markaz. Fondimizda anatomiya, fiziologiya, farmakologiya, jarrohlik, pediatriya va boshqa yo'nalishlar bo'yicha o'zbek, rus va ingliz tillaridagi adabiyotlar jamlangan.</p>
+      <p>Maqsadimiz — zamonaviy tibbiy bilimlarni tez va qulay yetkazish, ilmiy izlanishlarga ko'mak berish va sog'liqni saqlash tizimi uchun malakali mutaxassislar tayyorlashga hissa qo'shish.</p>
+      <p>Kutubxonaga a'zo bo'lish uchun talaba guvohnomasi yoki ish joyidan ma'lumotnoma yetarli.</p>
+    </div>
+    <div class="hours">
+      <h3 style="margin-bottom:10px">Ish vaqti</h3>
+      <table>
+        <tr><td>Dushanba – Juma</td><td>8:30 – 19:00</td></tr>
+        <tr><td>Shanba</td><td>9:00 – 15:00</td></tr>
+        <tr><td>Yakshanba</td><td>Dam olish kuni</td></tr>
+        <tr><td>Elektron katalog</td><td>24/7</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="aloqa">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>Aloqa</h2><p class="sub">Savol yoki so'rov qoldiring</p></div></div>
+    <div class="contact">
+      <form onsubmit="sendForm(event)">
+        <div><label>Ism-familiya</label><input required placeholder="Masalan: Aziza Karimova"></div>
+        <div><label>Telefon yoki e-mail</label><input required placeholder="+998 __ ___ __ __"></div>
+        <div><label>Murojaat turi</label>
+          <select><option>Kitob buyurtma qilish</option><option>A'zolik</option><option>Elektron resurslar</option><option>Boshqa</option></select>
+        </div>
+        <div><label>Xabar</label><textarea placeholder="Xabaringizni yozing..."></textarea></div>
+        <button class="btn" type="submit">Yuborish</button>
+        <div class="note" id="note">✓ Xabaringiz qabul qilindi. Tez orada bog'lanamiz.</div>
+      </form>
+      <div class="info">
+        <div><b>📍 Manzil</b><span>Buxoro shahri, Tibbiyot instituti, 1-bino, 2-qavat</span></div>
+        <div><b>📞 Telefon</b><span>+998 (65) 000-00-00</span></div>
+        <div><b>✉️ E-mail</b><span>kutubxona@tibbiyot.uz</span></div>
+        <div><b>🚌 Yo'l</b><span>3, 7 va 12-avtobuslar, "Tibbiyot instituti" bekati</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Tibbiyot kutubxonasi. Barcha huquqlar himoyalangan.</span>
+    <span>Bilim — eng yaxshi dori.</span>
+  </div>
+</footer>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="box">
+    <h3 id="m-title"></h3>
+    <p id="m-desc"></p>
+    <div class="note" id="m-ok" style="display:block;background:#f0fdfa;border-color:#99f6e4;color:#0f766e">Kitob 3 kun davomida siz uchun saqlab qo'yiladi. Olish uchun talaba guvohnomasini keltiring.</div>
+    <div class="row">
+      <button class="btn ghost" onclick="closeModal()">Yopish</button>
+      <button class="btn" onclick="confirmBook()">Band qilish</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CATS = [
+  {id:'anat', name:'Anatomiya', ic:'🦴', color:'#0f766e'},
+  {id:'fiz',  name:'Fiziologiya', ic:'❤️', color:'#be123c'},
+  {id:'farm', name:'Farmakologiya', ic:'💊', color:'#7c3aed'},
+  {id:'jar',  name:'Jarrohlik', ic:'🩺', color:'#1d4ed8'},
+  {id:'ped',  name:'Pediatriya', ic:'👶', color:'#ea580c'},
+  {id:'ter',  name:'Terapiya', ic:'🏥', color:'#0369a1'},
+  {id:'mik',  name:'Mikrobiologiya', ic:'🦠', color:'#15803d'},
+  {id:'ham',  name:'Hamshiralik ishi', ic:'🧑‍⚕️', color:'#a16207'},
+];
+
+const BOOKS = [
+  {t:"Odam anatomiyasi. 1-jild", a:"R. Ahmedov", c:'anat', y:2021, l:"O'zbek", n:5, e:true},
+  {t:"Odam anatomiyasi. 2-jild", a:"R. Ahmedov", c:'anat', y:2021, l:"O'zbek", n:0, e:true},
+  {t:"Atlas of Human Anatomy", a:"F. Netter", c:'anat', y:2022, l:"Ingliz", n:2, e:false},
+  {t:"Topografik anatomiya", a:"B. Tursunov", c:'anat', y:2019, l:"O'zbek", n:3, e:false},
+  {t:"Normal fiziologiya", a:"S. Nurmatov", c:'fiz', y:2020, l:"O'zbek", n:7, e:true},
+  {t:"Физиология человека", a:"В. Покровский", c:'fiz', y:2018, l:"Rus", n:4, e:false},
+  {t:"Guyton and Hall Textbook of Medical Physiology", a:"J. Hall", c:'fiz', y:2023, l:"Ingliz", n:1, e:true},
+  {t:"Farmakologiya", a:"M. Mahsumov", c:'farm', y:2022, l:"O'zbek", n:6, e:true},
+  {t:"Клиническая фармакология", a:"В. Кукес", c:'farm', y:2019, l:"Rus", n:0, e:true},
+  {t:"Dori vositalari ma'lumotnomasi", a:"O. Xolmatov", c:'farm', y:2024, l:"O'zbek", n:3, e:false},
+  {t:"Umumiy jarrohlik", a:"A. Qosimov", c:'jar', y:2020, l:"O'zbek", n:4, e:true},
+  {t:"Общая хирургия", a:"С. Петров", c:'jar', y:2017, l:"Rus", n:2, e:false},
+  {t:"Schwartz's Principles of Surgery", a:"F. Brunicardi", c:'jar', y:2019, l:"Ingliz", n:1, e:false},
+  {t:"Bolalar kasalliklari", a:"N. Daminov", c:'ped', y:2021, l:"O'zbek", n:5, e:true},
+  {t:"Neonatologiya asoslari", a:"G. Rahimova", c:'ped', y:2023, l:"O'zbek", n:2, e:true},
+  {t:"Nelson Textbook of Pediatrics", a:"R. Kliegman", c:'ped', y:2020, l:"Ingliz", n:0, e:false},
+  {t:"Ichki kasalliklar", a:"E. Jo'rayev", c:'ter', y:2022, l:"O'zbek", n:8, e:true},
+  {t:"Kardiologiya", a:"T. Yo'ldoshev", c:'ter', y:2021, l:"O'zbek", n:3, e:false},
+  {t:"Harrison's Principles of Internal Medicine", a:"J. Loscalzo", c:'ter', y:2022, l:"Ingliz", n:1, e:true},
+  {t:"Tibbiy mikrobiologiya", a:"K. Sodiqov", c:'mik', y:2020, l:"O'zbek", n:4, e:true},
+  {t:"Immunologiya", a:"L. Abdullayeva", c:'mik', y:2023, l:"O'zbek", n:2, e:false},
+  {t:"Hamshiralik ishi asoslari", a:"D. Ismoilova", c:'ham', y:2022, l:"O'zbek", n:9, e:true},
+  {t:"Bemorlarni parvarish qilish", a:"Z. Qodirova", c:'ham', y:2021, l:"O'zbek", n:0, e:true},
+  {t:"Birinchi tibbiy yordam", a:"S. Umarov", c:'ham', y:2024, l:"O'zbek", n:6, e:true},
+];
+
+let cat = 'all';
+let selected = null;
+
+function setCat(id){
+  cat = id;
+  document.querySelectorAll('.cat').forEach(b=>b.classList.toggle('active', b.dataset.id===id));
+  render();
+  if(id!=='all') document.getElementById('kitoblar').scrollIntoView({behavior:'smooth'});
+}
+
+function renderCats(){
+  document.getElementById('cats').innerHTML = CATS.map(c=>{
+    const n = BOOKS.filter(b=>b.c===c.id).length;
+    return `<button class="cat" data-id="${c.id}" onclick="setCat('${c.id}')">
+      <div class="ic">${c.ic}</div><b>${c.name}</b><small>${n} ta kitob</small></button>`;
+  }).join('');
+}
+
+function render(){
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const sort = document.getElementById('sort').value;
+  const lang = document.getElementById('lang').value;
+  const av = document.getElementById('avail').value;
+  let list = BOOKS.filter(b =>
+    (cat==='all' || b.c===cat) &&
+    (lang==='all' || b.l===lang) &&
+    (av==='all' || (av==='yes' && b.n>0) || (av==='e' && b.e)) &&
+    (!q || b.t.toLowerCase().includes(q) || b.a.toLowerCase().includes(q) || CATS.find(c=>c.id===b.c).name.toLowerCase().includes(q))
+  );
+  if(sort==='title') list.sort((x,y)=>x.t.localeCompare(y.t));
+  if(sort==='year')  list.sort((x,y)=>y.y-x.y);
+  if(sort==='author')list.sort((x,y)=>x.a.localeCompare(y.a));
+
+  document.getElementById('count').textContent = `${list.length} ta kitob topildi`;
+  const el = document.getElementById('books');
+  if(!list.length){ el.innerHTML = `<div class="empty">Hech narsa topilmadi. Qidiruvni o'zgartirib ko'ring.</div>`; return; }
+  el.innerHTML = list.map((b,i)=>{
+    const c = CATS.find(x=>x.id===b.c);
+    return `<div class="book">
+      <div class="cover" style="background:linear-gradient(160deg,${c.color},${c.color}cc)"><span>${b.t}</span></div>
+      <div class="body">
+        <span class="tag">${c.name}</span>
+        <div class="author">${b.a} · ${b.y} · ${b.l}</div>
+        <div class="meta">
+          <span class="${b.n>0?'avail':'busy'}">${b.n>0 ? b.n+' nusxa mavjud' : 'Band'}</span>
+          ${b.e ? '<span title="Elektron nusxa">💻 PDF</span>' : ''}
+        </div>
+        <button class="btn" style="margin-top:8px" ${b.n>0?'':'disabled'} onclick="openModal('${b.t.replace(/'/g,"\\'")}','${b.a}')">${b.n>0?'Band qilish':'Navbatga yozilish'}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openModal(t,a){
+  selected = t;
+  document.getElementById('m-title').textContent = t;
+  document.getElementById('m-desc').textContent = 'Muallif: ' + a;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+function confirmBook(){
+  const b = BOOKS.find(x=>x.t===selected);
+  if(b && b.n>0) b.n--;
+  closeModal(); render();
+}
+function sendForm(e){
+  e.preventDefault();
+  document.getElementById('note').style.display='block';
+  e.target.querySelectorAll('input,textarea').forEach(i=>i.value='');
+}
+
+// Active nav on scroll
+const links = document.querySelectorAll('.menu a');
+window.addEventListener('scroll',()=>{
+  let cur='top';
+  document.querySelectorAll('section[id]').forEach(s=>{ if(window.scrollY >= s.offsetTop-120) cur=s.id; });
+  links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+cur));
+});
+
+document.getElementById('st-total').textContent = BOOKS.length;
+renderCats();
+render();
+</script>
+</body>
+</html>
