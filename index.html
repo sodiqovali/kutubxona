@@ -223,6 +223,190 @@
   .qr-big{display:flex;flex-direction:column;align-items:center;gap:12px;margin:12px 0}
   .qr-big canvas,.qr-big img{width:220px;height:220px;border:8px solid #fff;border-radius:8px;box-shadow:var(--shadow)}
   .qr-link{font-size:.85rem;color:var(--brand);word-break:break-all;text-align:center;background:var(--brand-soft);padding:8px 12px;border-radius:8px;width:100%}
+
+  /* Library interior photo before the book catalog */
+  .library-photo{width:100%;margin:0;padding:0 0 36px;background:var(--bg)}
+  .library-photo .wrap{width:100%;max-width:none;margin:0;padding:0}
+  .library-photo .photo-frame{position:relative;width:100%;overflow:hidden;border-radius:0;box-shadow:0 12px 34px rgba(18,33,38,.13);background:#e8eff0}
+  .library-photo img{display:block;width:100%;height:clamp(300px,42vw,560px);object-fit:cover;object-position:center center}
+  .library-photo .photo-caption{position:absolute;left:0;right:0;bottom:0;padding:42px clamp(20px,6vw,90px) 24px;color:#fff;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:800;background:linear-gradient(transparent,rgba(4,25,30,.68));text-shadow:0 2px 8px rgba(0,0,0,.4)}
+  @media(max-width:760px){.library-photo{padding:0 0 26px}.library-photo img{height:260px}.library-photo .photo-caption{padding:30px 18px 16px}}
+
+
+  /* ===== Modern medical library redesign ===== */
+  :root{
+    --bg:#f3f7fb; --card:#ffffff; --ink:#142b3b; --muted:#647789;
+    --brand:#087f8c; --brand-2:#16b8a8; --brand-soft:#e1f5f3;
+    --line:#e2eaf0; --accent:#e16b55; --radius:20px;
+    --shadow:0 14px 38px rgba(20,43,59,.08);
+  }
+  body{background:var(--bg);color:var(--ink);font-size:15px}
+  .wrap{max-width:1240px}
+  header{background:rgba(255,255,255,.94);border-bottom:1px solid rgba(218,231,238,.9);box-shadow:0 4px 22px rgba(20,43,59,.045)}
+  .nav{height:78px}
+  .logo{font-size:1.12rem;letter-spacing:-.025em;color:#087f8c}
+  .logo img{width:46px;height:46px;border-radius:13px;box-shadow:0 4px 12px rgba(8,127,140,.12)}
+  .menu{gap:6px}
+  .menu a{font-size:.91rem;padding:10px 15px}
+  .menu a:hover,.menu a.active{background:#e5f5f3;color:#087f8c}
+
+  .hero{
+    min-height:570px;padding:88px 0 78px;
+    background:
+      linear-gradient(100deg,rgba(5,29,46,.86) 0%,rgba(5,48,62,.68) 53%,rgba(7,61,75,.25) 100%),
+      url('buxdu.png') center 48%/cover no-repeat;
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .hero h1{max-width:780px;font-size:clamp(2.6rem,5vw,4.25rem);letter-spacing:-.055em;line-height:1.06}
+  .hero p{max-width:690px;font-size:1.13rem;line-height:1.8;color:rgba(255,255,255,.94);margin-top:22px}
+  .search{max-width:720px;margin-top:34px;padding:8px;border-radius:18px;gap:6px;box-shadow:0 18px 48px rgba(0,0,0,.22)}
+  .search input{padding:15px 18px;font-size:1rem}
+  .search button{border-radius:13px;padding:14px 27px;background:#087f8c}
+  .search button:hover{background:#06636e}
+  .stats{gap:0;margin-top:42px;max-width:720px}
+  .stat{min-width:145px;padding:0 25px;border-left:1px solid rgba(255,255,255,.28)}
+  .stat:first-child{padding-left:0;border-left:0}
+  .stat b{font-size:2.15rem;letter-spacing:-.04em}
+  .stat span{font-size:.88rem;color:rgba(255,255,255,.9)}
+
+  section{padding:76px 0}
+  h2{font-size:clamp(1.65rem,2.7vw,2.15rem);letter-spacing:-.04em;color:#17364a}
+  .sub{font-size:.98rem;color:#738596;margin-top:7px}
+  .sec-head{margin-bottom:30px;align-items:center}
+  .sec-head h2:after{content:"";display:block;width:42px;height:4px;border-radius:4px;background:linear-gradient(90deg,#087f8c,#35c5ad);margin-top:12px}
+  .btn{background:#087f8c;border-radius:12px;padding:11px 18px;box-shadow:0 5px 14px rgba(8,127,140,.13)}
+  .btn:hover{background:#06636e;transform:translateY(-1px)}
+  .btn.ghost{box-shadow:none;border:1px solid #b9d9dc;color:#087f8c;background:#fff}
+  .btn.ghost:hover{background:#e8f7f5}
+
+  #bolimlar{background:linear-gradient(180deg,#f3f7fb,#edf5f7)}
+  .cats{grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:16px}
+  .cat{border:1px solid #e2ebef;border-radius:18px;padding:22px;background:rgba(255,255,255,.94);box-shadow:0 5px 18px rgba(20,43,59,.035);min-height:145px}
+  .cat:hover,.cat.active{border-color:#7bc9c7;box-shadow:0 14px 30px rgba(8,127,140,.11);transform:translateY(-4px)}
+  .cat .ic{width:50px;height:50px;border-radius:15px;background:linear-gradient(145deg,#e2f7f3,#d9edf8);font-size:1.5rem;margin-bottom:14px}
+  .cat b{font-size:1rem;color:#1d3a4c}
+  .cat small{display:block;margin-top:4px;font-size:.83rem}
+
+  .library-photo{padding:0 0 64px;background:#edf5f7}
+  .library-photo .photo-frame{box-shadow:0 20px 48px rgba(20,43,59,.14)}
+  .library-photo img{height:clamp(320px,43vw,590px);object-position:center 52%}
+  .library-photo .photo-caption{padding:55px clamp(22px,7vw,110px) 30px;font-size:clamp(1.15rem,2.4vw,1.65rem);letter-spacing:-.02em;background:linear-gradient(transparent,rgba(4,25,35,.72))}
+
+  #kitoblar{background:#fff!important;border-top:1px solid #e7eef2!important;border-bottom:1px solid #e7eef2!important}
+  .toolbar{gap:12px;margin-bottom:24px}
+  .toolbar select,.toolbar input{min-height:46px;border:1px solid #dce7ed;border-radius:12px;padding:11px 15px;background:#f9fbfc;color:#294252;outline:none}
+  .toolbar select:focus,.toolbar input:focus{border-color:#58b8b7;box-shadow:0 0 0 3px rgba(22,184,168,.12)}
+  .books{grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:20px}
+  .book{border:1px solid #e3ebef;border-radius:19px;box-shadow:0 6px 20px rgba(20,43,59,.045);transition:transform .25s,box-shadow .25s}
+  .book:hover{box-shadow:0 18px 38px rgba(20,43,59,.12);transform:translateY(-5px)}
+  .cover{height:176px;padding:20px;font-size:1.08rem;align-items:flex-end}
+  .cover:before{width:9px;background:rgba(255,255,255,.22)}
+  .cover span{max-width:92%;font-weight:800;line-height:1.3;text-shadow:0 2px 10px rgba(0,0,0,.22)}
+  .book .body{padding:18px;gap:9px}
+  .tag{padding:5px 11px;background:#e5f5f3;color:#087f8c;font-size:.74rem}
+  .book .author{font-size:.85rem;line-height:1.5}
+  .meta{padding-top:13px;border-top:1px solid #edf1f4;font-size:.82rem}
+  .avail{color:#16845d}
+  .busy{color:#d15c55}
+  .qr-mini{background:#f8fbfc;border-color:#dce8ed;border-radius:12px;padding:9px}
+  .qr-mini:hover{border-color:#73c5c1}
+  .qr-mini canvas,.qr-mini img{width:50px;height:50px}
+  .qr-mini small{font-size:.77rem}
+  .empty{background:#f7fafb;border:1px dashed #d6e4e9;border-radius:16px}
+
+  #xizmatlar{background:linear-gradient(180deg,#edf5f7 0%,#f7fafb 100%)}
+  .services{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .svc{border:1px solid #e1ebef;border-radius:20px;padding:25px;background:#fff;box-shadow:0 7px 22px rgba(20,43,59,.045);transition:.25s}
+  .svc:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(20,43,59,.09);border-color:#c5e4e3}
+  .svc .ic{display:grid;place-items:center;width:54px;height:54px;border-radius:16px;background:linear-gradient(145deg,#e2f7f3,#e8f0fb);font-size:1.55rem;margin-bottom:17px}
+  .svc h3{font-size:1.08rem;color:#1b3b4d;margin-bottom:8px}
+  .svc p{font-size:.92rem;line-height:1.7;color:#6c7e8d}
+
+  #biz{background:#fff!important;border-top:1px solid #e7eef2!important}
+  .about{grid-template-columns:1.25fr .85fr;gap:48px}
+  .about p{font-size:.98rem;line-height:1.85;color:#657989;margin-top:14px}
+  .hours{border:1px solid #e2ebef;border-radius:20px;padding:27px;box-shadow:var(--shadow);background:linear-gradient(145deg,#fff,#f8fbfc)}
+  .hours h3{font-size:1.18rem;color:#1b3b4d}
+  .hours td{padding:13px 0;border-bottom:1px solid #eaf0f3;color:#637788}
+  .hours td:last-child{color:#1e3c4e}
+
+  #aloqa{background:linear-gradient(180deg,#f3f7fb,#eaf3f6)}
+  .contact{grid-template-columns:1.05fr .95fr;gap:24px}
+  form{border:1px solid #e0eaf0;border-radius:20px;padding:28px;box-shadow:var(--shadow);gap:15px}
+  label{color:#294657;font-size:.88rem;margin-bottom:6px;display:block}
+  form input,form textarea,form select{border:1px solid #dce7ed;border-radius:12px;background:#fbfdfe;padding:13px 15px;outline:none}
+  form input:focus,form textarea:focus,form select:focus{border-color:#58b8b7;box-shadow:0 0 0 3px rgba(22,184,168,.12)}
+  form textarea{min-height:130px}
+  .info{gap:12px}
+  .info div{border:1px solid #e0eaf0;border-radius:17px;padding:18px 20px;background:#fff;box-shadow:0 5px 18px rgba(20,43,59,.035)}
+  .info b{color:#1c3d50;font-size:.96rem}
+  .info span{font-size:.91rem;line-height:1.6}
+  footer{background:linear-gradient(110deg,#102f43,#0b5962);color:#d2e4e8;padding:35px 0}
+  footer .wrap{align-items:center}
+  .modal .box{border-radius:22px;box-shadow:0 25px 70px rgba(0,0,0,.22);padding:28px}
+
+  @media(max-width:760px){
+    .nav{height:68px}
+    .logo{font-size:1rem}
+    .logo img{width:40px;height:40px}
+    .hero{min-height:0;padding:66px 0 54px;background-position:58% center}
+    .hero h1{font-size:clamp(2.25rem,10vw,3.2rem)}
+    .hero p{font-size:1rem;margin-top:17px}
+    .search{margin-top:25px;flex-direction:column;border-radius:16px;padding:8px}
+    .search input{padding:12px}
+    .search button{width:100%;border-radius:11px}
+    .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 0;margin-top:30px}
+    .stat{padding:0 14px;min-width:0}
+    .stat:nth-child(odd){padding-left:0;border-left:0}
+    .stat b{font-size:1.75rem}
+    section{padding:54px 0}
+    .sec-head{align-items:flex-start}
+    .cats{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+    .cat{padding:16px;min-height:130px}
+    .books{grid-template-columns:repeat(auto-fill,minmax( min(100%,220px),1fr));gap:14px}
+    .cover{height:150px}
+    .library-photo{padding:0 0 44px}
+    .library-photo img{height:260px}
+    .about,.contact{grid-template-columns:1fr;gap:20px}
+    form{padding:20px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *,*:before,*:after{scroll-behavior:auto!important;transition:none!important}
+  }
+
+
+  /* Katalog kartalaridagi QR kodlarni kattaroq va oson skanerlanadigan qilish */
+  .book .qr-mini{
+    gap:14px;
+    padding:12px;
+    min-height:112px;
+    border:1px solid #d8e9e9;
+    border-radius:14px;
+    background:linear-gradient(135deg,#f7fcfc,#eef8f7);
+  }
+  .book .qr-mini canvas,
+  .book .qr-mini img{
+    width:88px !important;
+    height:88px !important;
+    flex:0 0 88px;
+    border:5px solid #fff;
+    border-radius:9px;
+    box-shadow:0 4px 14px rgba(20,43,59,.12);
+    image-rendering:pixelated;
+  }
+  .book .qr-mini small{
+    font-size:.86rem;
+    line-height:1.45;
+    font-weight:700;
+    color:#315565;
+  }
+  @media(max-width:760px){
+    .book .qr-mini{min-height:94px;padding:9px;gap:11px}
+    .book .qr-mini canvas,
+    .book .qr-mini img{width:74px !important;height:74px !important;flex-basis:74px}
+    .book .qr-mini small{font-size:.8rem}
+  }
+
 </style>
 </head>
 <body>
@@ -269,6 +453,15 @@
       <button class="btn ghost" onclick="setCat('all')">Barchasini ko'rsatish</button>
     </div>
     <div class="cats" id="cats"></div>
+  </div>
+</section>
+
+<section class="library-photo" aria-label="Kutubxona ichki ko'rinishi">
+  <div class="wrap">
+    <div class="photo-frame">
+      <img src="kitob.png" alt="Tibbiyot kutubxonasidagi kitob javonlari">
+      <div class="photo-caption">Tibbiyot kutubxonasi — bilim va izlanish maskani</div>
+    </div>
   </div>
 </section>
 
